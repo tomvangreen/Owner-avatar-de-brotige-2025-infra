@@ -36,7 +36,7 @@
     [http.services.libraryDev-service]
     [http.services.libraryDev-service.loadBalancer]
         [[http.services.libraryDev-service.loadBalancer.servers]]
-        url = "http://localhost:3000"  # Point to the local service running on localhost:3000
+        url = "http://brotig-library:3000"  # Point to the local service running on localhost:3000
 
 #    [http.services.librarianDev-service]
 #    [http.services.librarianDev-service.loadBalancer]
