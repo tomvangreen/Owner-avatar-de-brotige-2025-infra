@@ -6,13 +6,7 @@ services:
     image: traefik:v2.10
     container_name: traefik
     command:
-      - "--api.insecure=true"  # Optional: Enable Traefik dashboard (not secure in production)
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-      - "--providers.docker=false"  # No Docker provider
-      - "--certificatesResolvers.myresolver.acme.httpChallenge.entryPoint=web"  # ACME HTTP challenge for Let's Encrypt
-      - "--certificatesResolvers.myresolver.acme.email=atombrot@gmail.com"  # Replace with your email
-      - "--certificatesResolvers.myresolver.acme.storage=/etc/traefik/acme.json"  # Storage for certificates
+      - "--configFile=/etc/traefik/traefik.toml"
     ports:
       - "80:80"   # HTTP
       - "443:443" # HTTPS
