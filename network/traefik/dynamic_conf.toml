@@ -18,7 +18,7 @@ certResolver = "myresolver"
 [http.services.librarianDev-service]
 [http.services.librarianDev-service.loadBalancer]
 [[http.services.librarianDev-service.loadBalancer.servers]]
-url = "http://host.docker.internal:3000"
+url = "http://host.docker.internal:3001"
 
 [http.middlewares.https-redirect.redirectScheme]
 scheme = "https"
