@@ -21,5 +21,6 @@ services:
       - "./traefik/acme.json:/etc/traefik/acme.json"  # Persistent storage for certificates
     labels:
       - "traefik.enable=true"
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   # Traefik does not run web services, only serves as a reverse proxy.
