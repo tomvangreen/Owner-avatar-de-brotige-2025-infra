@@ -1,3 +1,6 @@
+[providers.file]
+filename = "/etc/traefik/dynamic_conf.toml"
+watch = true
 [entryPoints]
   [entryPoints.web]
     address = ":80"

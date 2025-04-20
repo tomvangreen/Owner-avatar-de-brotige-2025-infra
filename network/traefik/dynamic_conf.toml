@@ -1,6 +1,6 @@
 [http.routers.libraryDev]
-rule = "Host(`library.dev.next.brausen.services`)"
 entryPoints = ["websecure"]
+rule = "Host(`library.dev.next.brausen.services`)"
 service = "libraryDev-service"
 middlewares = ["https-redirect"]
 
