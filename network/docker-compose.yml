@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  # Traefik reverse proxy service
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - "--api.insecure=true"  # Optional: Enable Traefik dashboard (not secure in production)
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--providers.docker=false"  # No Docker provider
+      - "--certificatesResolvers.myresolver.acme.httpChallenge.entryPoint=web"  # ACME HTTP challenge for Let's Encrypt
+      - "--certificatesResolvers.myresolver.acme.email=youremail@example.com"  # Replace with your email
+      - "--certificatesResolvers.myresolver.acme.storage=/etc/traefik/acme.json"  # Storage for certificates
+    ports:
+      - "80:80"   # HTTP
+      - "443:443" # HTTPS
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"  # Allow Traefik to interact with Docker (optional)
+      - "./traefik/acme.json:/etc/traefik/acme.json"  # Persistent storage for certificates
+    labels:
+      - "traefik.enable=true"
+
+  # Traefik does not run web services, only serves as a reverse proxy.

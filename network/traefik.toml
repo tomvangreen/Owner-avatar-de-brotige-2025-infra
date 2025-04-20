@@ -1,0 +1,49 @@
+[entryPoints]
+    [entryPoints.web]
+    address = ":80"
+
+    [entryPoints.websecure]
+    address = ":443"
+
+[api]
+    dashboard = true
+    insecure = true
+
+[certificatesResolvers.myresolver.acme]
+    email = "atombrot@gmail.com"
+    storage = "acme.json"
+    [certificatesResolvers.myresolver.acme.httpChallenge]
+    entryPoint = "web"
+
+[http.routers]
+    [http.routers.libraryDev]
+    rule = "Host(`library.dev.next.brausen.services`)"
+    service = "bb-library-dev"
+    entryPoints = ["websecure"]
+    middlewares = ["https-redirect"]
+    [http.routers.app1.tls]
+        certResolver = "myresolver"
+
+#    [http.routers.librarianDev]
+#    rule = "Host(`librarian.dev.next.brausen.services`)"
+#    service = "app2-service"
+#    entryPoints = ["websecure"]
+#    middlewares = ["https-redirect"]
+#    [http.routers.app2.tls]
+#        certResolver = "myresolver"
+
+[http.services]
+    [http.services.libraryDev-service]
+    [http.services.libraryDev-service.loadBalancer]
+        [[http.services.libraryDev-service.loadBalancer.servers]]
+        url = "http://localhost:3000"  # Point to the local service running on localhost:3000
+
+#    [http.services.librarianDev-service]
+#    [http.services.librarianDev-service.loadBalancer]
+#        [[http.services.librarianDev-service.loadBalancer.servers]]
+#        url = "http://localhost:3001"  # Point to the local service running on localhost:5000
+
+[http.middlewares]
+    [http.middlewares.https-redirect.redirectScheme]
+        scheme = "https"
+        permanent = true
