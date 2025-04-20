@@ -7,6 +7,7 @@ services:
     container_name: traefik
     command:
       - "--configFile=/etc/traefik/traefik.toml"
+      - "--providers.file.filename=/etc/traefik/dynamic_conf.toml"
     ports:
       - "80:80"   # HTTP
       - "443:443" # HTTPS
@@ -14,6 +15,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"  # Allow Traefik to interact with Docker (optional)
       - "./traefik/acme.json:/etc/traefik/acme.json"  # Persistent storage for certificates
       - "./traefik.toml:/etc/traefik/traefik.toml"
+      - "./traefik/dynamic_conf.toml:/etc/traefik/dynamic_conf.toml"
     labels:
       - "traefik.enable=true"
     extra_hosts:

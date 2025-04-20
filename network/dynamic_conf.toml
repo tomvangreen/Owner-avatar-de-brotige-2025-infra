@@ -1,0 +1,17 @@
+[http.routers.libraryDev]
+rule = "Host(`library.dev.next.brausen.services`)"
+entryPoints = ["websecure"]
+service = "libraryDev-service"
+middlewares = ["https-redirect"]
+
+[http.routers.libraryDev.tls]
+certResolver = "myresolver"
+
+[http.services.libraryDev-service]
+  [http.services.libraryDev-service.loadBalancer]
+    [[http.services.libraryDev-service.loadBalancer.servers]]
+    url = "http://host.docker.internal:3000"
+
+[http.middlewares.https-redirect.redirectScheme]
+scheme = "https"
+permanent = true
