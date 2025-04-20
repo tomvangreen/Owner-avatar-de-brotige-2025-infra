@@ -4,6 +4,12 @@ rule = "Host(`library.dev.next.brausen.services`)"
 service = "libraryDev-service"
 middlewares = ["https-redirect"]
 
+[http.routers.librarianDev]
+entryPoints = ["websecure"]
+rule = "Host(`librarian.dev.next.brausen.services`)"
+service = "libraryDev-service"
+middlewares = ["https-redirect"]
+
 [http.routers.libraryDev.tls]
 certResolver = "myresolver"
 
