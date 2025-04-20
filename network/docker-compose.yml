@@ -8,6 +8,7 @@ services:
     command:
       - "--configFile=/etc/traefik/traefik.toml"
       - "--providers.file.filename=/etc/traefik/dynamic_conf.toml"
+      - "--providers.file=true"
     ports:
       - "80:80"   # HTTP
       - "443:443" # HTTPS
