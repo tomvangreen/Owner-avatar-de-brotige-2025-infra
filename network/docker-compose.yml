@@ -12,13 +12,13 @@ services:
       - "--providers.docker=false"  # No Docker provider
       - "--certificatesResolvers.myresolver.acme.httpChallenge.entryPoint=web"  # ACME HTTP challenge for Let's Encrypt
       - "--certificatesResolvers.myresolver.acme.email=atombrot@example.com"  # Replace with your email
-      - "--certificatesResolvers.myresolver.acme.storage=/home/atombrot/projects/bb/de-brotige-2025-infra/network/traefik/acme.json"  # Storage for certificates
+      - "--certificatesResolvers.myresolver.acme.storage=/etc/traefik/acme.json"  # Storage for certificates
     ports:
       - "80:80"   # HTTP
       - "443:443" # HTTPS
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"  # Allow Traefik to interact with Docker (optional)
-      - "./traefik/acme.json:/home/atombrot/projects/bb/de-brotige-2025-infra/network/acme.json"  # Persistent storage for certificates
+      - "./traefik/acme.json:/etc/traefik/acme.json"  # Persistent storage for certificates
     labels:
       - "traefik.enable=true"
 
