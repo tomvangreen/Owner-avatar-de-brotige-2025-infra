@@ -5,6 +5,9 @@
     [entryPoints.websecure]
     address = ":443"
 
+[log]
+    level = "DEBUG"
+
 [api]
     dashboard = true
     insecure = true
