@@ -14,7 +14,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"  # Allow Traefik to interact with Docker (optional)
       - "./traefik/acme.json:/etc/traefik/acme.json"  # Persistent storage for certificates
-      - "./traefik.toml:/etc/traefik/traefik.toml"
+      - "./traefik/traefik.toml:/etc/traefik/traefik.toml"
       - "./traefik/dynamic_conf.toml:/etc/traefik/dynamic_conf.toml"
     labels:
       - "traefik.enable=true"
